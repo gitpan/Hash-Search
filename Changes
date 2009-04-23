@@ -1,0 +1,6 @@
+Revision history for Perl extension Hash::Search.
+
+0.01  Tue Mar 17 19:16:43 2009
+	- original version; created by h2xs 1.23 with options
+		-b 5.8.8 -AX Hash::Search
+
