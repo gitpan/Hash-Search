@@ -1,10 +1,18 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Hash-Search
-version:      0.01
-version_from: lib/Hash/Search.pm
-installdirs:  site
-requires:
+--- #YAML:1.0
 
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.30
+name: 		Hash-Search
+version: 	0.02
+abstract: 	Search and return hash keys using regular expressions
+author: 
+  - Steve Brokenshire <sbrokenshire@xestia.co.uk>
+
+license: 	perl
+generated_by: 	My own bare hands.
+
+no_index:
+  directory:
+    - t
+
+meta-spec:
+  version: 1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html

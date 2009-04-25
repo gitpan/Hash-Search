@@ -1,6 +1,5 @@
 package Hash::Search;
 
-use 5.8.0;
 use strict;
 use warnings;
 use Carp;
@@ -14,7 +13,7 @@ our @EXPORT = qw(
 	hash_search_resultcount
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my %hash_search_result = ();
 my $hash_search_result_count = 0;
