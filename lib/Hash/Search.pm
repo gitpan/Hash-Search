@@ -8,21 +8,28 @@ require Exporter;
 
 our @ISA = qw(Exporter);
 
-our @EXPORT = qw(
-	hash_search hash_search_resultdata 
-	hash_search_resultcount
-);
-
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my %hash_search_result = ();
 my $hash_search_result_count = 0;
+
+sub new{
+
+	# new: create a new instance of 
+
+	my $class = shift;
+	my $self = {};
+
+	return bless($self, $class);
+
+}
 
 sub hash_search{
 
 	# hash_search: Find matches of names using the regular expression
 	# and hash given.
 
+	my $class = shift;
 	my ($passed_hash, %passed_hash);
 	my $passed_expression;
 	my $regex_test = "";
@@ -91,6 +98,7 @@ sub hash_search_resultcount{
 1;
 
 __END__
+
 =head1 NAME
 
 Hash::Search - Search and return hash keys using regular expressions
@@ -98,13 +106,14 @@ Hash::Search - Search and return hash keys using regular expressions
 =head1 SYNOPSIS
 
   use Hash::Search;
+  my $hs = new Hash::Search;
   my %hashlist = (
     "one" => "orange", "two" => "banana", "three" => "apple",
     "four" => "pear", "five" => "pineapple"
   );
-  hash_search("e\$", %hashlist);
-  my %hashresult = hash_search_resultdata;
-  my $hashresult_count = hash_search_resultcount;
+  $hs->hash_search("e\$", %hashlist);
+  my %hashresult = $hs->hash_search_resultdata;
+  my $hashresult_count = $hs->hash_search_resultcount;
   print $hashresult_count . " result(s) found: ";
   foreach my $hash_key (keys %hashresult){
     print $hash_key . " ";
@@ -117,9 +126,17 @@ expressions pattern based on the name of the key and returns the
 results as a seperate hash. It also keeps a count of how many
 matches have been made.
 
+=head2 Creating an instance
+
+Before Hash::Search can be used, an instance of Hash::Search must be
+created.
+
+  use Hash::Search;
+  $hs = new Hash::Search;
+
 =head2 Finding keys in a hash
 
-  hash_search("p\$", %hash);
+  $hs->hash_search("p\$", %hash);
 
 The hash_search subroutine requires two parameters, one is a regular
 expression used for searching the names of keys and another for the
@@ -134,19 +151,19 @@ information depending if hash_search finds matches or not.
 
 =head2 Getting the results data
 
-  %results = hash_search_resultdata;
+  %results = $hs->hash_search_resultdata;
 
-The value returned will be a hash. If no matches have been found then
-it will return an empty hash.
+The value returned from hash_search_resultdata will be a hash. If no 
+matches have been found then it will return an empty hash.
 
 =head2 Getting the count of results
 
-  $searchresults = hash_search_resultcount;
+  $searchresults = $hs->hash_search_resultcount;
   print "Matches found: " . $searchresults;
 	
-  print "Number of results returned: " . hash_search_resultcount;
+  print "Number of results returned: " . $hs->hash_search_resultcount;
 
-The value returned will be a scalar value.
+The value returned from hash_search_resultcount will be a scalar value.
 
 =head1 EXAMPLES
 
@@ -156,9 +173,11 @@ The value returned will be a scalar value.
   use Hash::Search;
 
   my $q = new CGI;
+  my $hs = new Hash::Search;
+
   my %formdata = $q->Vars;
-  hash_search("^prefix_", %formdata);
-  my %resultdata = hash_search_resultdata;
+  $hs->hash_search("^prefix_", %formdata);
+  my %resultdata = $hs->hash_search_resultdata;
 
 =head2 Using Hash::Search with CGI::Lite
 
@@ -166,9 +185,10 @@ The value returned will be a scalar value.
   use Hash::Search;
 
   my $cgi = new CGI::Lite;
+  my $hs = new Hash::Search;
   my %formdata = $cgi->parse_form_data;
-  hash_search("^prefix_", %formdata);
-  my %resultdata = hash_search_resultdata;	
+  $hs->hash_search("^prefix_", %formdata);
+  my %resultdata = $hs->hash_search_resultdata;	
 
 =head1 CAVEATS / KNOWN BUGS
 

@@ -1,7 +1,7 @@
 --- #YAML:1.0
 
 name: 		Hash-Search
-version: 	0.02
+version: 	0.03
 abstract: 	Search and return hash keys using regular expressions
 author: 
   - Steve Brokenshire <sbrokenshire@xestia.co.uk>
